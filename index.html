@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Parada – Restaurante Pizzeria</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --negro: #0d0d0d;
+    --rojo: #c8232a;
+    --rojo-dark: #9e1a1f;
+    --blanco: #ffffff;
+    --gris-claro: #f0f0f0;
+    --gris-texto: #cccccc;
+    --separador: rgba(200,35,42,0.35);
+  }
+
+  body {
+    background-color: var(--negro);
+    color: var(--blanco);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* HEADER */
+  header {
+    background: #0a0a0a;
+    border-bottom: 2px solid var(--rojo);
+    padding: 28px 20px 20px;
+    text-align: center;
+  }
+  .logo-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--blanco);
+    line-height: 1;
+  }
+  .logo-title span { color: var(--rojo); }
+  .logo-sub {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--gris-texto);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .logo-tagline {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--rojo);
+    margin-top: 8px;
+  }
+
+  /* NAV TABS */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #111;
+    border-bottom: 1px solid #222;
+    padding: 0 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gris-texto);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav a:hover, nav a.active { color: var(--rojo); border-color: var(--rojo); }
+
+  /* MAIN */
+  main { max-width: 820px; margin: 0 auto; padding: 0 16px 60px; }
+
+  /* SECTION */
+  section { padding-top: 48px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--rojo);
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--separador);
+  }
+  .section-subtitle {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  /* ITEMS */
+  .items { display: flex; flex-direction: column; gap: 0; }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .item:last-child { border-bottom: none; }
+  .item-name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blanco);
+    flex: 1;
+  }
+  .item-desc {
+    font-size: 13px;
+    color: #888;
+    font-weight: 400;
+  }
+  .item-price {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--rojo);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .badge-sin-lactosa { background: #1a3a2a; color: #4dbb7d; }
+  .badge-picante { background: #3a1010; color: #ff6b6b; }
+  .badge-encargo { background: #2a1a00; color: #e08c00; }
+
+  /* AVISO LACTOSA */
+  .aviso {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #0f1f16;
+    border-left: 3px solid #3DAA5C;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    color: #4dbb7d;
+  }
+
+  /* ENCARGO BLOCK */
+  .encargo-block {
+    margin: 16px 0;
+    padding: 14px 18px;
+    border: 1px solid #3a2a00;
+    border-radius: 4px;
+    background: #120e00;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .encargo-icon { font-size: 28px; }
+  .encargo-text { font-family: 'Raleway', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #e08c00; }
+  .encargo-sub { font-size: 12px; color: #888; }
+
+  /* ALERGENOS */
+  .alergenos {
+    margin-top: 56px;
+    padding: 20px;
+    border: 1px solid #2a1a1a;
+    border-radius: 4px;
+    background: #0f0a0a;
+    text-align: center;
+  }
+  .alergenos-title { font-family: 'Raleway', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--rojo); text-transform: uppercase; margin-bottom: 8px; }
+  .alergenos p { font-size: 12px; color: #777; line-height: 1.7; }
+
+  /* PEDIDOS */
+  .pedidos {
+    margin-top: 24px;
+    padding: 20px;
+    background: #0a0f0a;
+    border: 1px solid #1a2a1a;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .pedidos-label { font-size: 12px; letter-spacing: 3px; color: #666; text-transform: uppercase; margin-bottom: 8px; }
+  .pedidos-tel { font-family: 'Raleway', sans-serif; font-size: 30px; font-weight: 900; color: var(--rojo); letter-spacing: 2px; }
+  .pedidos-sub { font-size: 12px; color: #555; margin-top: 6px; font-style: italic; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid #1a1a1a;
+    font-size: 12px;
+    color: #444;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-title">LA <span>PARADA</span></div>
+  <div class="logo-sub">Restaurante · Pizzeria</div>
+  <div class="logo-tagline">Pizza · Pasta · Risotto · Auténtico sabor italiano</div>
+</header>
+
+<nav id="nav">
+  <a href="#antipasto">Antipasto</a>
+  <a href="#pastas">Pastas</a>
+  <a href="#risotto">Risotto</a>
+  <a href="#pizzas">Pizzas</a>
+  <a href="#bocadillos">Bocadillos</a>
+  <a href="#postres">Postres</a>
+</nav>
+
+<main>
+
+  <!-- ANTIPASTO -->
+  <section id="antipasto">
+    <div class="section-header">
+      <div class="section-title">Antipasto</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="section-subtitle">Entrantes</div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Bruschetta</div><div class="item-desc">Pan tostado con picadillo de tomate, cebolla, ajo, albahaca y orégano</div></div><div class="item-price">10,50€</div></div>
+      <div class="item"><div><div class="item-name">Espaguetis con ajo y picante</div></div><div class="item-price">8,20€</div></div>
+      <div class="item"><div><div class="item-name">Carpaccio</div><div class="item-desc">Solomillo de ternera y parmesano</div></div><div class="item-price">18,00€</div></div>
+      <div class="item"><div><div class="item-name">Ensalada César</div></div><div class="item-price">13,50€</div></div>
+      <div class="item"><div><div class="item-name">Ensalada Mixta</div></div><div class="item-price">7,50€</div></div>
+      <div class="item"><div><div class="item-name">Ensalada de Canónigos</div><div class="item-desc">Con huevo duro y bacon tostado</div></div><div class="item-price">8,50€</div></div>
+      <div class="item"><div><div class="item-name">Ensalada de Rúcula</div><div class="item-desc">Con tomate cherry y parmesano</div></div><div class="item-price">8,50€</div></div>
+      <div class="item"><div><div class="item-name">Ensalada Caprese</div><div class="item-desc">Con tomate, mozzarella y albahaca</div></div><div class="item-price">11,00€</div></div>
+    </div>
+  </section>
+
+  <!-- PASTAS -->
+  <section id="pastas">
+    <div class="section-header">
+      <div class="section-title">Pastas</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Espaguetis con tomate</div></div><div class="item-price">8,20€</div></div>
+      <div class="item"><div><div class="item-name">Espaguetis al pesto</div></div><div class="item-price">12,50€</div></div>
+      <div class="item"><div><div class="item-name">Espaguetis carbonara</div></div><div class="item-price">13,50€</div></div>
+      <div class="item"><div><div class="item-name">Espaguetis boloñesa</div></div><div class="item-price">12,90€</div></div>
+      <div class="item"><div><div class="item-name">Tagliatelle con salmón y nata</div></div><div class="item-price">14,50€</div></div>
+      <div class="item"><div><div class="item-name">Tagliatelle Frutos del Mar</div><div class="item-desc">Mixto de marisco</div></div><div class="item-price">14,90€</div></div>
+      <div class="item"><div><div class="item-name">Tagliatelle Mar y Montaña</div><div class="item-desc">Langostinos y setas</div></div><div class="item-price">16,50€</div></div>
+      <div class="item"><div><div class="item-name">Tagliatelle Cuatro Quesos</div><div class="item-desc">Parmesano, mozzarella, ricotta y gorgonzola</div></div><div class="item-price">13,50€</div></div>
+      <div class="item"><div><div class="item-name">Macarrones Puttanesca</div><div class="item-desc">Boquerones en salazón, aceitunas negras, alcaparras y tomate</div></div><div class="item-price">15,40€</div></div>
+      <div class="item"><div><div class="item-name">Macarrones boloñesa</div></div><div class="item-price">12,90€</div></div>
+      <div class="item"><div><div class="item-name">Macarrones de Verduras Mixtas</div><div class="item-desc">De temporada</div></div><div class="item-price">12,10€</div></div>
+      <div class="item"><div><div class="item-name">Macarrones Diavola</div><div class="item-desc">Chorizo picante y tomate</div></div><div class="item-price">12,50€</div></div>
+      <div class="item"><div><div class="item-name">Lasaña de verduras</div><div class="item-desc">De temporada</div></div><div class="item-price">14,90€</div></div>
+      <div class="item"><div><div class="item-name">Lasaña de carne</div></div><div class="item-price">13,90€</div></div>
+      <div class="item"><div><div class="item-name">Lasaña de atún</div></div><div class="item-price">14,90€</div></div>
+    </div>
+    <div class="aviso">Las pastas se pueden pedir con ingredientes <strong>sin lactosa</strong></div>
+  </section>
+
+  <!-- RISOTTO -->
+  <section id="risotto">
+    <div class="section-header">
+      <div class="section-title">Risotto</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Risotto con queso parmesano</div></div><div class="item-price">12,50€</div></div>
+      <div class="item"><div><div class="item-name">Risotto con boletus</div></div><div class="item-price">14,50€</div></div>
+      <div class="item"><div><div class="item-name">Risotto con langostinos</div></div><div class="item-price">15,00€</div></div>
+      <div class="item"><div><div class="item-name">Risotto con verduras de temporada</div></div><div class="item-price">13,00€</div></div>
+    </div>
+    <div class="encargo-block">
+      <div class="encargo-icon">🐙</div>
+      <div>
+        <div class="encargo-text">Bacalao y Pulpo</div>
+        <div class="encargo-sub">Disponible por encargo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIZZAS -->
+  <section id="pizzas">
+    <div class="section-header">
+      <div class="section-title">Pizzas</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Margarita</div><div class="item-desc">Tomate y mozzarella</div></div><div class="item-price">10,00€</div></div>
+      <div class="item"><div><div class="item-name">Prosciutto</div><div class="item-desc">Tomate, mozzarella y jamón cocido</div></div><div class="item-price">11,90€</div></div>
+      <div class="item"><div><div class="item-name">Prosciutto Funghi</div><div class="item-desc">Tomate, mozzarella, jamón cocido y champiñones</div></div><div class="item-price">12,90€</div></div>
+      <div class="item"><div><div class="item-name">Barbacoa</div><div class="item-desc">Tomate, mozzarella, carne picada y salsa barbacoa</div></div><div class="item-price">13,90€</div></div>
+      <div class="item"><div><div class="item-name">Boloñesa</div><div class="item-desc">Mozzarella y boloñesa</div></div><div class="item-price">13,90€</div></div>
+      <div class="item"><div><div class="item-name">Hawaiana</div><div class="item-desc">Tomate, mozzarella, jamón cocido y piña</div></div><div class="item-price">13,90€</div></div>
+      <div class="item"><div><div class="item-name">Hawaiana de Pollo al Curry</div><div class="item-desc">Tomate, mozzarella, pollo al curry y piña</div></div><div class="item-price">14,90€</div></div>
+      <div class="item"><div><div class="item-name">Gorgonzola</div><div class="item-desc">Tomate, mozzarella, gorgonzola, berenjena y jamón serrano</div></div><div class="item-price">16,90€</div></div>
+      <div class="item"><div><div class="item-name">Rúcula</div><div class="item-desc">Tomate, mozzarella, tomate cherry, rúcula, parmesano y jamón serrano</div></div><div class="item-price">16,90€</div></div>
+      <div class="item"><div><div class="item-name">Carbonara</div><div class="item-desc">Mozzarella, parmesano, cebolla, bacon, champiñones y nata</div></div><div class="item-price">14,90€</div></div>
+      <div class="item"><div><div class="item-name">Salmón</div><div class="item-desc">Tomate, mozzarella, salmón ahumado, cebolla cruda y alcaparras</div></div><div class="item-price">16,90€</div></div>
+      <div class="item"><div><div class="item-name">4 Quesos</div><div class="item-desc">Tomate, mozzarella, parmesano, ricotta y gorgonzola</div></div><div class="item-price">13,90€</div></div>
+      <div class="item"><div><div class="item-name">Vegetariana</div><div class="item-desc">Tomate, mozzarella y verduras de temporada</div></div><div class="item-price">14,00€</div></div>
+      <div class="item"><div><div class="item-name">Atún</div><div class="item-desc">Tomate, mozzarella, atún, pimientos, aceitunas negras y cebolla</div></div><div class="item-price">15,00€</div></div>
+      <div class="item"><div><div class="item-name">Diavola <span class="badge badge-picante">🌶 Picante</span></div><div class="item-desc">Tomate, mozzarella, chorizo picante, pimientos y ajo</div></div><div class="item-price">14,90€</div></div>
+      <div class="item"><div><div class="item-name">Calzone</div><div class="item-desc">Tomate, mozzarella, jamón cocido y huevo fresco</div></div><div class="item-price">15,00€</div></div>
+      <div class="item"><div><div class="item-name">Pizza Piccolina – Niños</div><div class="item-desc">Margarita, Prosciutto o Barbacoa o Hawaiana</div></div><div class="item-price">9,00€</div></div>
+    </div>
+  </section>
+
+  <!-- BOCADILLOS -->
+  <section id="bocadillos">
+    <div class="section-header">
+      <div class="section-title">Bocadillos</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Bocadillo de jamón serrano</div></div><div class="item-price">7,00€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de lomo y queso</div></div><div class="item-price">6,50€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de bacon y queso</div></div><div class="item-price">5,50€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de pollo</div></div><div class="item-price">6,00€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de tortilla</div></div><div class="item-price">5,50€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo mixto</div><div class="item-desc">Jamón york y queso</div></div><div class="item-price">5,00€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de atún</div></div><div class="item-price">6,50€</div></div>
+      <div class="item"><div><div class="item-name">Bocadillo de calamares</div></div><div class="item-price">7,00€</div></div>
+      <div class="item"><div><div class="item-name">Sándwich mixto</div><div class="item-desc">Jamón york y queso</div></div><div class="item-price">4,00€</div></div>
+      <div class="item"><div><div class="item-name">Sándwich vegetal</div></div><div class="item-price">7,80€</div></div>
+      <div class="item"><div><div class="item-name">Sándwich vegetal con salmón</div></div><div class="item-price">8,80€</div></div>
+    </div>
+  </section>
+
+  <!-- POSTRES -->
+  <section id="postres">
+    <div class="section-header">
+      <div class="section-title">Postres</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="item-name">Tarta de queso</div></div><div class="item-price">4,50€</div></div>
+      <div class="item"><div><div class="item-name">Tiramisú</div></div><div class="item-price">4,50€</div></div>
+      <div class="item"><div><div class="item-name">Crema de limón</div></div><div class="item-price">3,50€</div></div>
+      <div class="item"><div><div class="item-name">Panna cotta</div></div><div class="item-price">3,50€</div></div>
+      <div class="item"><div><div class="item-name">Flan de huevo</div></div><div class="item-price">4,00€</div></div>
+      <div class="item"><div><div class="item-name">Tarta de manzana</div><div class="item-desc">Apfelstrudel</div></div><div class="item-price">5,50€</div></div>
+    </div>
+  </section>
+
+  <!-- PEDIDOS -->
+  <div class="pedidos">
+    <div class="pedidos-label">Pedidos para recoger</div>
+    <div class="pedidos-tel">📞 652 422 441</div>
+    <div class="pedidos-sub">Tu sabor de siempre, donde lo necesites</div>
+  </div>
+
+  <!-- ALERGENOS -->
+  <div class="alergenos">
+    <div class="alergenos-title">Información sobre alérgenos</div>
+    <p>Todos nuestros platos pueden contener alérgenos o trazas de los mismos.<br>
+    Pregunta a nuestro personal para más información.</p>
+    <p style="margin-top:10px; font-size:11px; color:#555;">Crustáceos · Sésamo · Frutos de cáscara · Gluten · Huevo · Pescado · Mostaza · Apio · Lácteos · Sulfitos · Soja · Altramuces</p>
+  </div>
+
+</main>
+
+<footer>¡Gracias por elegirnos! · La Parada Restaurante Pizzeria</footer>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (active) {
+          active.classList.add('active');
+          active.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  navLinks.forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
